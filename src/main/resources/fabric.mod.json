@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "antirat",
+  "version": "${version}",
+  "name": "AntiRat",
+  "description": "Protects your Minecraft account from token-stealing RAT mods. Monitors network, file access, reflection, and thread activity to block malicious mods from exfiltrating your session tokens.",
+  "authors": [
+    "Akar1881"
+  ],
+  "contact": {
+    "sources": "https://github.com/Akar1881/AntiRat"
+  },
+  "license": "MIT",
+  "icon": "assets/antirat/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.akar1881.antirat.AntiRatMod"
+    ],
+    "client": [
+      "com.akar1881.antirat.AntiRatClientMod"
+    ]
+  },
+  "mixins": [
+    "antirat.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21"
+  },
+  "suggests": {
+    "fabric-api": "*"
+  }
+}
