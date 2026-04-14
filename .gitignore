@@ -1,7 +1,6 @@
 build/
 .gradle/
 *.class
-*.jar
 *.log
 run/
 out/
@@ -11,3 +10,9 @@ out/
 .classpath
 .project
 bin/
+
+v26/build/
+v26/.gradle/
+
+!gradle/wrapper/gradle-wrapper.jar
+!v26/gradle/wrapper/gradle-wrapper.jar
