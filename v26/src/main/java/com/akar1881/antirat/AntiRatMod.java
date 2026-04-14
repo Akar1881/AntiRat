@@ -27,7 +27,7 @@ public class AntiRatMod implements ModInitializer {
         initialized = true;
 
         LOGGER.info("==============================================");
-        LOGGER.info("  AntiRat Mod v1.1.0 by Akar1881");
+        LOGGER.info("  AntiRat Mod v1.0.0 by Akar1881");
         LOGGER.info("  Initializing protection systems...");
         LOGGER.info("==============================================");
 

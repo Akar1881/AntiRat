@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.akar1881.antirat.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "HttpURLConnectionMixin"
+  ],
+  "client": [
+    "SessionMixin",
+    "MinecraftClientMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

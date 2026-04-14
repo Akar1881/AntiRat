@@ -6,6 +6,15 @@ AntiRat runs silently in the background and defends your session token, account 
 
 ---
 
+## Version Support
+
+| Minecraft Version | AntiRat JAR | Fabric Loader | Java |
+|---|---|---|---|
+| **1.21.x** (1.21.1 – 1.21.11) | `anti-rat-1.1.0.jar` | 0.16.0+ | Java 21+ |
+| **26.x** (26.1+) | `anti-rat-26x-1.1.0.jar` | 0.18.0+ | Java 25+ |
+
+---
+
 ## Summary
 
 AntiRat is a client-side security mod for Minecraft (Fabric) that provides **6 layers of real-time protection** against malicious mods (commonly known as "RATs" or "token stealers"). It monitors network activity, guards your session token, scans loaded mods, watches file access, detects reflection abuse, and kills suspicious threads — all automatically with zero configuration needed.
@@ -29,7 +38,7 @@ Only official Mojang, Microsoft, Fabric, and community domains (Modrinth, CurseF
 Monitors all running threads for unauthorized access to your Minecraft session token. A watchdog thread scans every 5 seconds and interrupts any suspicious thread attempting to read token-related fields.
 
 ### Session Mixin (Direct Token Guard)
-Hooks directly into `Session.getAccessToken()` using Mixin. Only trusted callers (Minecraft, Mojang, Fabric internals) can access the real token. Any untrusted mod that tries to read your access token gets a blocked response — the real token is never exposed.
+Hooks directly into the session `getAccessToken()` method using Mixin. Only trusted callers (Minecraft, Mojang, Fabric internals) can access the real token. Any untrusted mod that tries to read your access token gets a blocked response — the real token is never exposed.
 
 ### File System Guard
 Monitors file I/O and blocks suspicious access to:
@@ -55,7 +64,7 @@ Continuously monitors all running threads and kills any that:
 
 ### Reflection Guard
 Detects and blocks unauthorized reflective access to sensitive Minecraft authentication classes:
-- `Session` and its token fields
+- Session/User class and token fields
 - `YggdrasilAuthenticationService`
 - `MinecraftSessionService`
 - `GameProfile`
@@ -64,15 +73,17 @@ Detects and blocks unauthorized reflective access to sensitive Minecraft authent
 
 ## Installation
 
-1. Install [Fabric Loader](https://fabricmc.net/use/installer/) (0.16.0+) for Minecraft 1.21.1
-2. Download `anti-rat-1.0.0.jar` from the [Releases page](https://github.com/Akar1881/AntiRat/releases)
+### Minecraft 1.21.x (1.21.1 – 1.21.11)
+1. Install [Fabric Loader](https://fabricmc.net/use/installer/) 0.16.0+ for your Minecraft version
+2. Download `anti-rat-1.1.0.jar` from the [Releases page](https://github.com/Akar1881/AntiRat/releases)
 3. Place the JAR in your `.minecraft/mods/` folder
 4. Launch Minecraft — AntiRat activates automatically
 
-**Requirements:**
-- Minecraft 1.21.1
-- Fabric Loader 0.16.0+
-- Java 21+
+### Minecraft 26.x (26.1+)
+1. Install [Fabric Loader](https://fabricmc.net/use/installer/) 0.18.0+ for Minecraft 26.x
+2. Download `anti-rat-26x-1.1.0.jar` from the [Releases page](https://github.com/Akar1881/AntiRat/releases)
+3. Place the JAR in your `.minecraft/mods/` folder
+4. Launch Minecraft — AntiRat activates automatically
 
 ---
 
@@ -142,13 +153,21 @@ If a legitimate mod is being blocked, simply add its domain to `antirat_trusted_
 
 ## Building from Source
 
+### 1.21.x build (requires Java 21+)
 ```bash
 git clone https://github.com/Akar1881/AntiRat.git
 cd AntiRat
 ./gradlew build
+# Output: build/libs/anti-rat-1.1.0.jar
 ```
 
-The output JAR will be in `build/libs/anti-rat-1.0.0.jar`.
+### 26.x build (requires Java 25+)
+```bash
+git clone https://github.com/Akar1881/AntiRat.git
+cd AntiRat/v26
+./gradlew build
+# Output: v26/build/libs/anti-rat-26x-1.1.0.jar
+```
 
 ---
 
@@ -165,6 +184,9 @@ A: That mod is likely trying to connect to a domain not on the whitelist. Add th
 
 **Q: Does AntiRat send any data anywhere?**
 A: No. AntiRat is completely offline and never sends any data. It only monitors and blocks outbound connections from other mods.
+
+**Q: Which JAR do I use for 26.x versions?**
+A: Use the `anti-rat-26x-1.1.0.jar` file, which is built specifically for Minecraft 26.x (26.1, 26.1.1, 26.1.2, and future 26.x releases).
 
 ---
 
